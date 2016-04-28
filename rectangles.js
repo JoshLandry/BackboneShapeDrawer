@@ -8,9 +8,14 @@
 
         className: 'rectangle',
 
+        events: {
+            'click': 'move'
+        },
+
         render: function() {
             this.setDimensions();
             this.setPosition();
+            this.setColor();
             return this;
         },
 
@@ -26,20 +31,51 @@
             this.$el.css({
                 left: position.x,
                 top: position.y
-            })
+            });
+        },
+
+        setColor: function () {
+            this.$el.css('background-color', this.model.get('color'));
+        },
+
+        move: function () {
+            this.$el.css('left', this.$el.position().left + 10);
         }
 
     });
 
-    var myRectangle = new Rectangle({
-        width: 100,
-        height: 60,
-        position: {
-            x: 300,
-            y: 150
-        }
-    });
+    var models = [
+        new Rectangle({
+            width: 100,
+            height: 60,
+            position: {
+                x: 300,
+                y: 150
+            },
+            color: '#ff0000'
+        }),
+        new Rectangle({
+            width: 100,
+            height: 60,
+            position: {
+                x: 300,
+                y: 150
+            },
+            color: '#00ff00'
+        }),
+        new Rectangle({
+            width: 100,
+            height: 60,
+            position: {
+                x: 300,
+                y: 150
+            },
+            color: '#0000ff'
+        })
+    ];
 
-    var myView = new RectangleView({model: myRectangle});
+    _(models).each(function (model) {
+        $('div#canvas').append(new RectangleView({model: model}).render().el);
+    });
 
 })();
