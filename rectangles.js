@@ -103,4 +103,10 @@
 
     // Validate is triggered automatically by Backbone w/ 'set' and 'save' operations.
 
+    // You can pass html directly into 'this.$el.html(<p></p>)'
+
+    // Don't attach views to existing elements
+
+    // Don't access DOM elements that aren't part of the view
+
 })();

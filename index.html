@@ -19,6 +19,53 @@
         <div id="canvas"></div>
         <div id="timer"></div>
     </body>
+    <script type="text/javascript">
+
+        var documents = [
+            new Backbone.Model({
+                title: 'JavaScript Modules',
+                content: 'why do we need modules'
+            }),
+            new Backbone.Model({
+                title: 'content modules',
+                content: 'why do we need content'
+            })
+        ];
+
+        var ContentsView = Backbone.View.extend({
+            tagName: 'ul',
+            render: function () {
+                _(this.collection).each(function (document) {
+                    this.$el.append(new DocumentListView({model: document}).render().el)
+                    // this.$el.append("text")
+                }, this);
+            }
+        });
+
+        var DocumentListView = Backbone.View.extend({
+            tagName: 'li',
+            render: function () {
+                this.$el.html(this.model.get('title'));
+                return this;
+            }
+        });
+
+        var DocumentRouter = Backbone.Router.extend({
+            routes: {
+                'contents': 'contents'
+            },
+            contents: function() {
+                // $('body').html(new ContentsView({collection: documents}).render().el)
+                $('body').append("test text")
+            }
+        });
+
+        var router = new DocumentRouter();
+        Backbone.history.start();
+
+        router.navigate('contents', {trigger:true});
+
+    </script>
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
 </html>
