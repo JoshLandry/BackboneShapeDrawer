@@ -78,4 +78,12 @@
         $('div#canvas').append(new RectangleView({model: model}).render().el);
     });
 
+    models[0].on('change:type', function () {
+        console.log('your mom');
+    });
+
+    models[0].set('type', 'truck');
+
+    console.log(models[0].get('width'));
+
 })();
