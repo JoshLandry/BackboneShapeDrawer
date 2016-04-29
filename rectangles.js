@@ -1,12 +1,20 @@
 (function () {
   
-    var Rectangle = Backbone.Model.extend({});
+    var Rectangle = Backbone.Model.extend({
+        defaults: {
+            'type': 'shape'
+        },
+    });
 
     var RectangleView = Backbone.View.extend({
 
         tagName: 'div',
 
         className: 'rectangle',
+
+        attributes: {
+             'data-value': 12345
+        },
 
         events: {
             'click': 'move'
@@ -55,20 +63,20 @@
             color: '#ff0000'
         }),
         new Rectangle({
-            width: 100,
-            height: 60,
+            width: 50,
+            height: 20,
             position: {
-                x: 300,
-                y: 150
+                x: 150,
+                y: 200
             },
             color: '#00ff00'
         }),
         new Rectangle({
-            width: 100,
-            height: 60,
+            width: 30,
+            height: 160,
             position: {
-                x: 300,
-                y: 150
+                x: 500,
+                y: 020
             },
             color: '#0000ff'
         })
@@ -78,12 +86,21 @@
         $('div#canvas').append(new RectangleView({model: model}).render().el);
     });
 
+    var rect1 = models[0];
+    var rect2 = models[1];
+
+    var rect4 = new Rectangle({});
+
     models[0].on('change:type', function () {
         console.log('your mom');
     });
 
     models[0].set('type', 'truck');
 
-    console.log(models[0].get('width'));
+    console.log(rect1.get('type'));
+    console.log(rect2.get('type'));
+    console.log(rect4.get('type'));
+
+    // Validate is triggered automatically by Backbone w/ 'set' and 'save' operations.
 
 })();
