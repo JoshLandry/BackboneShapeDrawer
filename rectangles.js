@@ -2,7 +2,13 @@
   
     var Rectangle = Backbone.Model.extend({
         defaults: {
-            'type': 'shape'
+            'type': 'shape',
+            'width': 50,
+            'height': 50,
+            'position': {
+                x: 600,
+                y: 100
+            }
         },
     });
 
@@ -82,9 +88,65 @@
         })
     ];
 
-    _(models).each(function (model) {
-        $('div#canvas').append(new RectangleView({model: model}).render().el);
+    var Rectangles = Backbone.Collection.extend({
+        model: Rectangle,
+        comparator: function (rectangle) {
+            return rectangle.get('width');
+        }
+    },
+    {
+        oneRectangle: function () {
+            return new Rectangle({
+                color: 'green'
+            })
+        }
     });
+
+    var r = Rectangles.oneRectangle();
+    console.log(JSON.stringify(r))
+
+    var rectangles = new Rectangles([
+            {
+                width: 100,
+                height: 60,
+                position: {
+                    x: 300,
+                    y: 150
+                },
+                color: '#ff0000'
+            },
+            {
+                width: 50,
+                height: 20,
+                position: {
+                    x: 150,
+                    y: 200
+                },
+                color: '#00ff00'
+            },
+            {
+                width: 30,
+                height: 160,
+                position: {
+                    x: 500,
+                    y: 020
+                },
+                color: '#0000ff'
+            }
+        ]);
+
+    rectangles.on('add', function (model, col, options) {
+        console.log('added '  + model.get('type') + ' at index ' + model.get('position').x + ", " + model.get('position').y);
+    });
+
+    rectangles.add(r);
+
+    var drawShapes = function () {
+        rectangles.forEach(function (rectangle) {
+        $('div#canvas').append(new RectangleView({model: rectangle}).render().el);
+        console.log('drew a rectangle');
+        });
+    }
 
     var rect1 = models[0];
     var rect2 = models[1];
@@ -100,6 +162,10 @@
     console.log(rect1.get('type'));
     console.log(rect2.get('type'));
     console.log(rect4.get('type'));
+
+    console.log(rectangles.length);
+
+    drawShapes();
 
     // Validate is triggered automatically by Backbone w/ 'set' and 'save' operations.
 
