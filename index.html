@@ -57,6 +57,16 @@
             }
         });
 
+        var DocumentView = Backbone.View.extend({
+            render: function () {
+                // this.$el.append(this.make('h1', null, this.model.get('title')));
+                // this.$el.append(this.make('div', null, this.model.get('content')));
+                $('body').append("<h1>"+ this.model.get('title')+ "</h1>");
+                $('body').append(this.model.get('content'));
+                return this;
+            }
+        });
+
         var DocumentRouter = Backbone.Router.extend({
             routes: {
                 'contents': 'contents',
@@ -66,13 +76,18 @@
                 $('body').append(new ContentsView({collection: documents}).render().el)
             },
 
-            // viewDocument: function (title) {
-            //     var selectedDocument = _(documents).find(function (document) {
-            //         return document.get('title') === title;
-            //     });
+            viewDocument: function (title) {
+                var selectedDocument = _(documents).find(function (document) {
+                    return document.get('title') === title;
+                });
 
-            //     $('body').empty().append(new DocumentView({model: selectedDocument}).render().el);
-            // }
+                $('body').empty().append(new DocumentView({model: selectedDocument}).render().el);
+            }
+        });
+
+        eventAggregator.on('document:selected', function(document) {
+            var urlPath = 'view/' + document.get('title');
+            router.navigate(urlPath, {trigger:true});
         });
 
         var router = new DocumentRouter();
