@@ -1,6 +1,7 @@
 (function () {
   
     var Rectangle = Backbone.Model.extend({
+        url: 'http://localhost:3000/rectangles',
         defaults: {
             'type': 'shape',
             'width': 50,
@@ -58,38 +59,10 @@
 
     });
 
-    var models = [
-        new Rectangle({
-            width: 100,
-            height: 60,
-            position: {
-                x: 300,
-                y: 150
-            },
-            color: '#ff0000'
-        }),
-        new Rectangle({
-            width: 50,
-            height: 20,
-            position: {
-                x: 150,
-                y: 200
-            },
-            color: '#00ff00'
-        }),
-        new Rectangle({
-            width: 30,
-            height: 160,
-            position: {
-                x: 500,
-                y: 020
-            },
-            color: '#0000ff'
-        })
-    ];
-
     var Rectangles = Backbone.Collection.extend({
         model: Rectangle,
+        localStorage: new Backbone.LocalStorage("Rectangles"),
+        url: 'http://localhost:3000/rectangles',
         comparator: function (rectangle) {
             return rectangle.get('width');
         }
@@ -135,11 +108,6 @@
             }
         ]);
 
-    rectangles.on('add', function (model, col, options) {
-        console.log('added '  + model.get('type') + ' at index ' + model.get('position').x + ", " + model.get('position').y);
-    });
-
-    rectangles.add(r);
 
     var drawShapes = function () {
         rectangles.forEach(function (rectangle) {
@@ -148,20 +116,25 @@
         });
     }
 
-    var rect1 = models[0];
-    var rect2 = models[1];
+    var saveShapes = function () {
 
-    var rect4 = new Rectangle({});
+        rectangles.forEach(function (rectangle) {
+            rectangle.save({}, {
+                success: function () {alert('u got it buddy')},
+                error: function () {alert('error motherfxcker')}
+            });
 
-    models[0].on('change:type', function () {
-        console.log('your mom');
+            console.log('save 2 server');
+        });
+     
+    }
+
+    rectangles.on('add', function (model, col, options) {
+        console.log('added '  + model.get('type') + ' at index ' + model.get('position').x + ", " + model.get('position').y);
+        saveShapes();
     });
 
-    models[0].set('type', 'truck');
-
-    console.log(rect1.get('type'));
-    console.log(rect2.get('type'));
-    console.log(rect4.get('type'));
+    rectangles.add(r);
 
     console.log(rectangles.length);
 
