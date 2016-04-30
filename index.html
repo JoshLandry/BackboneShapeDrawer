@@ -32,18 +32,25 @@
             })
         ];
 
+        var eventAggregator = _.extend({}, Backbone.Events);
+
         var ContentsView = Backbone.View.extend({
             tagName: 'ul',
             render: function () {
                 _(this.collection).each(function (document) {
                     this.$el.append(new DocumentListView({model: document}).render().el)
-                    // this.$el.append("text")
                 }, this);
+                return this;
             }
         });
 
         var DocumentListView = Backbone.View.extend({
             tagName: 'li',
+            events: {
+                'click': function(){
+                    eventAggregator.trigger('document:selected', this.model);
+                }
+            },
             render: function () {
                 this.$el.html(this.model.get('title'));
                 return this;
@@ -52,12 +59,20 @@
 
         var DocumentRouter = Backbone.Router.extend({
             routes: {
-                'contents': 'contents'
+                'contents': 'contents',
+                'view/:title': 'viewDocument'
             },
             contents: function() {
-                // $('body').html(new ContentsView({collection: documents}).render().el)
-                $('body').append("test text")
-            }
+                $('body').append(new ContentsView({collection: documents}).render().el)
+            },
+
+            // viewDocument: function (title) {
+            //     var selectedDocument = _(documents).find(function (document) {
+            //         return document.get('title') === title;
+            //     });
+
+            //     $('body').empty().append(new DocumentView({model: selectedDocument}).render().el);
+            // }
         });
 
         var router = new DocumentRouter();
