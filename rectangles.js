@@ -1,7 +1,15 @@
-(function () {
+var rectApp = {};
+
+(function (shapes) {
   
-    var Rectangle = Backbone.Model.extend({
-        url: 'http://localhost:3000/rectangles',
+    shapes.Rectangle = Backbone.Model.extend({
+        // url: 'http://localhost:3000/rectangles',
+        area: function () {
+            return this.get('height') * this.get('width')
+        },
+        perimeter: function () {
+            return 2*this.get('height') + 2*this.get('width')
+        },
         defaults: {
             'type': 'shape',
             'width': 50,
@@ -60,7 +68,7 @@
     });
 
     var Rectangles = Backbone.Collection.extend({
-        model: Rectangle,
+        model: shapes.Rectangle,
         localStorage: new Backbone.LocalStorage("Rectangles"),
         url: 'http://localhost:3000/rectangles',
         comparator: function (rectangle) {
@@ -69,7 +77,7 @@
     },
     {
         oneRectangle: function () {
-            return new Rectangle({
+            return new shapes.Rectangle({
                 color: 'green'
             })
         }
@@ -148,4 +156,4 @@
 
     // Don't access DOM elements that aren't part of the view
 
-})();
+})(rectApp);
