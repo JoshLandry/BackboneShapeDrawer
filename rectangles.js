@@ -70,7 +70,7 @@ var rectApp = {};
     var Rectangles = Backbone.Collection.extend({
         model: shapes.Rectangle,
         localStorage: new Backbone.LocalStorage("Rectangles"),
-        url: 'http://localhost:3000/rectangles',
+        // url: 'http://localhost:3000/rectangles',
         comparator: function (rectangle) {
             return rectangle.get('width');
         }
