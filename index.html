@@ -115,20 +115,4 @@
     </script>
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
-    <script>
-        function initDraggable (){
-            var gridContainer = $("#canvas");
-
-            Draggable.create(".rectangle", {
-                bounds: gridContainer,
-                edgeResistance:1,
-                cursor: "pointer",
-                throwProps:true
-            })
-        }
-
-        $(document).ready(function(){
-            initDraggable();
-        });
-    </script>
 </html>

@@ -142,11 +142,24 @@ var rectApp = {};
         console.log(shapes.rectangles.length);
     }
 
+    shapes.initDraggable = function() {
+        var gridContainer = $("#canvas");
+
+            Draggable.create(".rectangle", {
+                bounds: gridContainer,
+                edgeResistance:1,
+                cursor: "pointer",
+                throwProps:true
+            })
+    }
+
     shapes.drawShapes = function () {
         shapes.rectangles.forEach(function (rectangle) {
         $('div#canvas').append(new RectangleView({model: rectangle}).render().el);
         console.log('drew a rectangle');
         });
+
+        shapes.initDraggable();
     }
 
     var saveShapes = function () {
