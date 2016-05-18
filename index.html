@@ -16,11 +16,17 @@
                 position: absolute;
                 border: 4px solid black;
             }
+
+            #canvas {
+                height: 900px;
+            }
         </style>
     </head>
     <body>
         <h1>Rectangles</h1>
         <div id="canvas"></div> <br>
+        <button onclick="rectApp.rectangles.add(rectApp.defaultRect)">Add new Rectangle</button>
+
         <div id="timer"></div>
         <div id="router"></div>
     </body>
@@ -104,18 +110,18 @@
 
         router.navigate('contents', {trigger:true});
 
-        router.navigate('search/cats', {trigger: true});
-
     </script>
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
     <script>
         function initProject (){
-            var gridContainer = $(".canvas");
+            var gridContainer = $("#canvas");
 
             Draggable.create(".rectangle", {
                 bounds: gridContainer,
-                edgeResistance:.65
+                edgeResistance:1,
+                cursor: "pointer",
+                throwProps:true
             })
         }
 

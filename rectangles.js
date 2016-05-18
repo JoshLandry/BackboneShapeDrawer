@@ -62,7 +62,7 @@ var rectApp = {};
         },
 
         move: function () {
-            this.$el.css('left', this.$el.position().left + 10);
+            this.$el.css('left', this.$el.position().up + 10);
         }
 
     });
@@ -86,7 +86,7 @@ var rectApp = {};
     var r = Rectangles.oneRectangle();
     console.log(JSON.stringify(r))
 
-    var rectangles = new Rectangles([
+    shapes.rectangles = new Rectangles([
             {
                 width: 100,
                 height: 60,
@@ -117,8 +117,8 @@ var rectApp = {};
         ]);
 
 
-    var drawShapes = function () {
-        rectangles.forEach(function (rectangle) {
+    shapes.drawShapes = function () {
+        shapes.rectangles.forEach(function (rectangle) {
         $('div#canvas').append(new RectangleView({model: rectangle}).render().el);
         console.log('drew a rectangle');
         });
@@ -126,27 +126,27 @@ var rectApp = {};
 
     var saveShapes = function () {
 
-        rectangles.forEach(function (rectangle) {
+        shapes.rectangles.forEach(function (rectangle) {
             rectangle.save({}, {
-                success: function () {alert('u got it buddy')},
+                success: function () {console.log('save 2 server')},
                 error: function () {alert('error motherfxcker')}
             });
 
-            console.log('save 2 server');
         });
      
     }
 
-    rectangles.on('add', function (model, col, options) {
+    shapes.rectangles.on('add', function (model, col, options) {
         console.log('added '  + model.get('type') + ' at index ' + model.get('position').x + ", " + model.get('position').y);
         saveShapes();
+        shapes.drawShapes();
     });
 
-    rectangles.add(r);
+    shapes.rectangles.add(r);
 
-    console.log(rectangles.length);
+    shapes.drawShapes();
 
-    drawShapes();
+    shapes.defaultRect = r;
 
     // Validate is triggered automatically by Backbone w/ 'set' and 'save' operations.
 
