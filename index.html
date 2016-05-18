@@ -25,7 +25,9 @@
     <body>
         <h1>Rectangles</h1>
         <div id="canvas"></div> <br>
-        <button onclick="rectApp.rectangles.add(rectApp.defaultRect)">Add new Rectangle</button>
+        <button onclick="rectApp.add()">Add new Rectangle</button>
+        <button onclick="rectApp.drawShapes()">Redraw Shapes</button>
+
 
         <div id="timer"></div>
         <div id="router"></div>
@@ -114,7 +116,7 @@
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
     <script>
-        function initProject (){
+        function initDraggable (){
             var gridContainer = $("#canvas");
 
             Draggable.create(".rectangle", {
@@ -126,7 +128,7 @@
         }
 
         $(document).ready(function(){
-            initProject();
+            initDraggable();
         });
     </script>
 </html>

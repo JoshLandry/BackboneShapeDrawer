@@ -77,8 +77,27 @@ var rectApp = {};
     },
     {
         oneRectangle: function () {
+            var randomColor;
+
+            if (Math.random() < .5) {
+                randomColor = "blue";
+            } else {
+                randomColor = "green";
+            }
+
+            var randomX = Math.random() * 600;
+            var randomY = Math.random() * 600;
+            var randomHeight = Math.random() * 200;
+            var randomWidth = Math.random() * 200;
+
             return new shapes.Rectangle({
-                color: 'green'
+                width: randomWidth,
+                height: randomHeight,
+                color: randomColor,
+                position: {
+                    x: randomX,
+                    y: randomY
+                }
             })
         }
     });
@@ -116,6 +135,12 @@ var rectApp = {};
             }
         ]);
 
+    shapes.add = function() {
+        var shape = Rectangles.oneRectangle();
+        shapes.rectangles.add(shape);
+        console.log('added');
+        console.log(shapes.rectangles.length);
+    }
 
     shapes.drawShapes = function () {
         shapes.rectangles.forEach(function (rectangle) {
@@ -143,6 +168,8 @@ var rectApp = {};
     });
 
     shapes.rectangles.add(r);
+
+    console.log(shapes.rectangles.length);
 
     shapes.drawShapes();
 
