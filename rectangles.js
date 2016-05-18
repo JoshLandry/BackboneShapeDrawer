@@ -79,10 +79,16 @@ var rectApp = {};
         oneRectangle: function () {
             var randomColor;
 
-            if (Math.random() < .5) {
+            if (Math.random() < .3) {
                 randomColor = "blue";
-            } else {
+            } else if (Math.random() < .7) {
+                randomColor = "yellow";
+            } else if (Math.random() < .4) {
                 randomColor = "green";
+            } else if (Math.random() < .5) {
+                randomColor = "red";
+            } else {
+                randomColor = "orange";
             }
 
             var randomX = Math.random() * 600;
@@ -140,6 +146,23 @@ var rectApp = {};
         shapes.rectangles.add(shape);
         console.log('added');
         console.log(shapes.rectangles.length);
+    }
+
+    shapes.populate = function() {
+        shapes.generateShapes = window.setInterval('rectApp.add()', 200);
+        shapes.drawShapesInterval = window.setInterval('rectApp.drawShapes()', 500);
+        setTimeout('rectApp.stop()', 2000);
+    }
+
+    shapes.stop = function() {
+        var stopGenerating = function() {
+            window.clearInterval(shapes.generateShapes);
+        } 
+        var stopDrawing = function() {
+            window.clearInterval(shapes.drawShapesInterval);
+        }
+        stopGenerating();
+        stopDrawing();
     }
 
     shapes.initDraggable = function() {
