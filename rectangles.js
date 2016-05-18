@@ -164,7 +164,6 @@ var rectApp = {};
     shapes.rectangles.on('add', function (model, col, options) {
         console.log('added '  + model.get('type') + ' at index ' + model.get('position').x + ", " + model.get('position').y);
         saveShapes();
-        shapes.drawShapes();
     });
 
     shapes.rectangles.add(r);
