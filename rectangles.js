@@ -39,6 +39,7 @@ var rectApp = {};
             this.setDimensions();
             this.setPosition();
             this.setColor();
+            this.setImage();
             return this;
         },
 
@@ -59,6 +60,10 @@ var rectApp = {};
 
         setColor: function () {
             this.$el.css('background-color', this.model.get('color'));
+        },
+
+        setImage: function () {
+            // this.$el.css({'background-image': url("./img/smearmaze.jpg")});
         },
 
         move: function () {
@@ -152,6 +157,36 @@ var rectApp = {};
         shapes.generateShapes = window.setInterval('rectApp.add()', 200);
         shapes.drawShapesInterval = window.setInterval('rectApp.drawShapes()', 500);
         setTimeout('rectApp.stop()', 2000);
+    }
+
+    shapes.flow = function() {
+
+        shapes.rectangles.on('add', function (model, col, options) {
+            shapes.rectangles.forEach(function (rectangle) {
+                rectangle.setPosition();
+                var posX = rectangle.get('position').x;
+                var posY = rectangle.get('position').y;
+                console.log("(" + posX + ", " + posY + ")");
+
+            });
+
+        });
+
+    }
+
+    shapes.posX = 0;
+
+    shapes.posY = 0;
+
+    shapes.mouse_position = function() {
+
+        shapes.posX = window.event.clientX;
+        shapes.posY = window.event.clientY; 
+
+        // console.log("(" + shapes.posX + ", " + shapes.posY + ")");
+
+        shapes.rectangles.forEach(function (rectangle) {
+        });
     }
 
     shapes.stop = function() {
