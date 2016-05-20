@@ -1,4 +1,6 @@
-(function () {
+var timerApp = {};
+
+(function (timerobject) {
 
     var RefreshingView = Backbone.View.extend({
         initialize: function() {
@@ -7,16 +9,25 @@
             }, this);
         },
         render: function() {
-            this.$el.html(this.model.get('text'));
+            this.$el.html(this.model.get('time'));
         }
     })
 
-    var textModel = new Backbone.Model({text: new Date().toString()});
+    var textModel = new Backbone.Model({time: new Date().toString()});
     var viewInstance = new RefreshingView({model: textModel, el: '#timer'});
     viewInstance.render();
 
-    setInterval(function() {
-        textModel.set({text: new Date().toString()})
-    }, 1000);
+    timerobject.textModel = textModel;
 
-}) ();
+    setInterval(function() {
+        timerobject.textModel.set({time: new Date().toString()})
+    }, 500);
+
+    timerobject.slowDrift = function() {
+        timerobject.textModel.on('change', function (model, col, options) {
+            console.log("slow drift");
+            rectApp.slightDrift();
+        });
+    }
+
+}) (timerApp);

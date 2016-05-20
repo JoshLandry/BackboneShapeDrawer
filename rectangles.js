@@ -196,6 +196,8 @@ var rectApp = {};
     
         shapes.rectangles.forEach(function (rectangle) {
 
+            // head for corners
+
             // if(rectangle.get('position').x < (300 * Math.random()) ) {
             //     var randPosX = rectangle.get('position').x - (shapes.posX / 10);
             //     var randPosY = rectangle.get('position').y - (shapes.posY / 10);
@@ -204,12 +206,18 @@ var rectApp = {};
             //     var randPosY = rectangle.get('position').y + (shapes.posX / 10);
             // }
 
-            if(rectangle.get('position').x < (500 * Math.random()) ) {
-                var randPosX = (shapes.posX += (Math.random() * 20) ) / 4;
-                var randPosY = (shapes.posY -= (Math.random() * 20) ) / 4;
+            if( Math.random() < .5 ) {
+                var randPosX = shapes.posX * 2;
+                var randPosY = shapes.posY * 2;
+            } else if ( Math.random() < .5) {
+                var randPosX = shapes.posX * 2
+                var randPosY = shapes.posY / 2
+            } else if ( Math.random() < .5) {
+                var randPosX = shapes.posX / 2
+                var randPosY = shapes.posY * 2
             } else {
-                var randPosX = shapes.posX -= (Math.random() * 20) / 8;
-                var randPosY = shapes.posY += (Math.random() * 20) / 8;
+                var randPosX = shapes.posX / 2
+                var randPosY = shapes.posY / 2
             }
 
             rectangle.set({position:{x: randPosX,y: randPosY}});
@@ -246,15 +254,34 @@ var rectApp = {};
 
         shapes.timer.drift += 100;
 
-        if(shapes.timer.drift < 2000) {
+        if(shapes.timer.drift < 1000) {
             window.setTimeout('rectApp.drift()', 100);
             window.setTimeout('rectApp.drawShapes()', 200);
-        } else if (shapes.timer.drift >= 2000) {
+        } else if (shapes.timer.drift >= 1000) {
             shapes.saveShapes();
             shapes.timer.drift = 0;
         }
 
         console.log(shapes.timer.drift);
+    }
+
+    shapes.slightDrift = function() {
+    
+        shapes.rectangles.forEach(function (rectangle) {
+
+            if(rectangle.get('position').x < (500 * Math.random()) ) {
+                var randPosX = rectangle.get('position').x += (Math.random() * 3);
+                var randPosY = rectangle.get('position').y -= (Math.random() * 3);
+            } else {
+                var randPosX = rectangle.get('position').x -= (Math.random() * 3);
+                var randPosY = rectangle.get('position').y += (Math.random() * 3);
+            }
+
+            rectangle.set({position:{x: randPosX,y: randPosY}});
+
+            shapes.drawShapes();
+
+        });
     }
 
     shapes.timer = {
