@@ -154,9 +154,14 @@ var rectApp = {};
     }
 
     shapes.populate = function() {
-        shapes.generateShapes = window.setInterval('rectApp.add()', 200);
-        shapes.drawShapesInterval = window.setInterval('rectApp.drawShapes()', 500);
-        setTimeout('rectApp.stop()', 2000);
+        if(shapes.timer.populate < 2000) {
+            shapes.timer.populate += 100
+            shapes.add();
+            window.setTimeout('rectApp.populate()', 100);
+            window.setTimeout('rectApp.drawShapes()', 100);
+        } else if (shapes.timer.populate >= 2000) {
+            shapes.timer.populate = 0;
+        }
     }
 
     shapes.flow = function() {
@@ -164,27 +169,27 @@ var rectApp = {};
         shapes.rectangles.forEach(function (rectangle) {
 
             if(rectangle.get('position').x < (500 * Math.random()) ) {
-                var randPosX = shapes.posX += (Math.random() * 20);
-                var randPosY = shapes.posY -= (Math.random() * 20);
+                var randPosX = shapes.posX += (Math.random() * 10);
+                var randPosY = shapes.posY -= (Math.random() * 10);
             } else {
-                var randPosX = shapes.posX -= (Math.random() * 20);
-                var randPosY = shapes.posY += (Math.random() * 20);
+                var randPosX = shapes.posX -= (Math.random() * 10);
+                var randPosY = shapes.posY += (Math.random() * 10);
             }
 
             rectangle.set({position:{x: randPosX,y: randPosY}});
 
         });
 
-        shapes.timer += 100;
+        shapes.timer.flow += 100;
 
-        if(shapes.timer < 3000) {
-            window.setTimeout('rectApp.flow()', 150);
-            window.setTimeout('rectApp.drawShapes()', 150);
-        } else if (shapes.timer >= 3000) {
-            shapes.timer = 0;
+        if(shapes.timer.flow < 3000) {
+            window.setTimeout('rectApp.flow()', 50);
+            window.setTimeout('rectApp.drawShapes()', 50);
+        } else if (shapes.timer.flow >= 3000) {
+            shapes.timer.flow = 0;
         }
 
-        console.log(shapes.timer);
+        console.log(shapes.timer.flow);
     }
 
     shapes.drift = function() {
@@ -193,7 +198,7 @@ var rectApp = {};
 
             if(rectangle.get('position').x < (500 * Math.random()) || rectangle.get('position').y < (500 * Math.random()) ) {
                 var randPosX = rectangle.get('position').x += (Math.random() * 30);
-                var randPosY = rectangle.get('position').y += (Math.random() * 30);
+                var randPosY = rectangle.get('position').y -= (Math.random() * 30);
             } else {
                 var randPosX = rectangle.get('position').x -= (Math.random() * 30);
                 var randPosY = rectangle.get('position').y += (Math.random() * 30);
@@ -203,35 +208,28 @@ var rectApp = {};
 
         });
 
-        shapes.timer += 100;
+        shapes.timer.drift += 100;
 
-        if(shapes.timer < 2000) {
+        if(shapes.timer.drift < 2000) {
             window.setTimeout('rectApp.drift()', 100);
             window.setTimeout('rectApp.drawShapes()', 200);
-        } else if (shapes.timer >= 2000) {
+        } else if (shapes.timer.drift >= 2000) {
             shapes.saveShapes();
-            shapes.timer = 0;
+            shapes.timer.drift = 0;
         }
 
-        console.log(shapes.timer);
+        console.log(shapes.timer.drift);
     }
 
-    shapes.timer = 0;
+    shapes.timer = {
+        flow: 0,
+        drift: 0,
+        populate: 0
+    }
 
     shapes.posX = 114;
 
     shapes.posY = 543;
-
-    shapes.stop = function() {
-        var stopGenerating = function() {
-            window.clearInterval(shapes.generateShapes);
-        } 
-        var stopDrawing = function() {
-            window.clearInterval(shapes.drawShapesInterval);
-        }
-        stopGenerating();
-        stopDrawing();
-    }
 
     shapes.initDraggable = function() {
         var gridContainer = $("#canvas");
