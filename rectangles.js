@@ -192,11 +192,47 @@ var rectApp = {};
         console.log(shapes.timer.flow);
     }
 
+    shapes.repulse = function() {
+    
+        shapes.rectangles.forEach(function (rectangle) {
+
+            // if(rectangle.get('position').x < (300 * Math.random()) ) {
+            //     var randPosX = rectangle.get('position').x - (shapes.posX / 10);
+            //     var randPosY = rectangle.get('position').y - (shapes.posY / 10);
+            // } else {
+            //     var randPosX = rectangle.get('position').x + (shapes.posX / 10);
+            //     var randPosY = rectangle.get('position').y + (shapes.posX / 10);
+            // }
+
+            if(rectangle.get('position').x < (500 * Math.random()) ) {
+                var randPosX = (shapes.posX += (Math.random() * 20) ) / 4;
+                var randPosY = (shapes.posY -= (Math.random() * 20) ) / 4;
+            } else {
+                var randPosX = shapes.posX -= (Math.random() * 20) / 8;
+                var randPosY = shapes.posY += (Math.random() * 20) / 8;
+            }
+
+            rectangle.set({position:{x: randPosX,y: randPosY}});
+
+        });
+
+        shapes.timer.repulse += 100;
+
+        if(shapes.timer.repulse < 3000) {
+            window.setTimeout('rectApp.repulse()', 50);
+            window.setTimeout('rectApp.drawShapes()', 50);
+        } else if (shapes.timer.repulse >= 3000) {
+            shapes.timer.repulse = 0;
+        }
+
+        console.log(shapes.timer.repulse);
+    }
+
     shapes.drift = function() {
     
         shapes.rectangles.forEach(function (rectangle) {
 
-            if(rectangle.get('position').x < (500 * Math.random()) || rectangle.get('position').y < (500 * Math.random()) ) {
+            if(rectangle.get('position').x < (500 * Math.random()) ) {
                 var randPosX = rectangle.get('position').x += (Math.random() * 30);
                 var randPosY = rectangle.get('position').y -= (Math.random() * 30);
             } else {
@@ -224,7 +260,8 @@ var rectApp = {};
     shapes.timer = {
         flow: 0,
         drift: 0,
-        populate: 0
+        populate: 0,
+        repulse: 0
     }
 
     shapes.posX = 114;
