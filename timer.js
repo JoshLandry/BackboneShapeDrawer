@@ -23,11 +23,8 @@ var timerApp = {};
         timerobject.textModel.set({time: new Date().toString()})
     }, 500);
 
-    timerobject.slowDrift = function() {
-        timerobject.textModel.on('change', function (model, col, options) {
-            console.log("slow drift");
-            rectApp.slightDrift();
-        });
-    }
+    timerobject.textModel.on('change', function (model, col, options) {
+        // rectApp.saveShapes();
+    });
 
 }) (timerApp);

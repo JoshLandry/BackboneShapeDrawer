@@ -149,17 +149,17 @@ var rectApp = {};
     shapes.add = function() {
         var shape = Rectangles.oneRectangle();
         shapes.rectangles.add(shape);
-        console.log('added');
-        console.log(shapes.rectangles.length);
+        // console.log(shapes.rectangles.length);
+        shapes.drawShapes();
     }
 
     shapes.populate = function() {
-        if(shapes.timer.populate < 2000) {
+        if(shapes.timer.populate < 800) {
             shapes.timer.populate += 100
             shapes.add();
             window.setTimeout('rectApp.populate()', 100);
-            window.setTimeout('rectApp.drawShapes()', 100);
-        } else if (shapes.timer.populate >= 2000) {
+            // window.setTimeout('rectApp.drawShapes()', 100);
+        } else if (shapes.timer.populate >= 800) {
             shapes.timer.populate = 0;
         }
     }
@@ -198,13 +198,33 @@ var rectApp = {};
 
             // head for corners
 
-            // if(rectangle.get('position').x < (300 * Math.random()) ) {
-            //     var randPosX = rectangle.get('position').x - (shapes.posX / 10);
-            //     var randPosY = rectangle.get('position').y - (shapes.posY / 10);
-            // } else {
-            //     var randPosX = rectangle.get('position').x + (shapes.posX / 10);
-            //     var randPosY = rectangle.get('position').y + (shapes.posX / 10);
-            // }
+            if(rectangle.get('position').x < (500 * Math.random()) ) {
+                var randPosX = rectangle.get('position').x - (shapes.posX / 10);
+                var randPosY = rectangle.get('position').y - (shapes.posY / 10);
+            } else {
+                var randPosX = rectangle.get('position').x + (shapes.posX / 10);
+                var randPosY = rectangle.get('position').y + (shapes.posX / 10);
+            }
+
+            rectangle.set({position:{x: randPosX,y: randPosY}});
+
+        });
+
+        shapes.timer.repulse += 100;
+
+        if(shapes.timer.repulse < 3000) {
+            window.setTimeout('rectApp.repulse()', 100);
+            window.setTimeout('rectApp.drawShapes()', 100);
+        } else if (shapes.timer.repulse >= 3000) {
+            shapes.timer.repulse = 0;
+        }
+
+        // console.log(shapes.timer.repulse);
+    }
+
+    shapes.fourPoint = function() {
+    
+        shapes.rectangles.forEach(function (rectangle) {
 
             if( Math.random() < .5 ) {
                 var randPosX = shapes.posX * 2;
@@ -224,16 +244,14 @@ var rectApp = {};
 
         });
 
-        shapes.timer.repulse += 100;
+        shapes.timer.fourPoint += 100;
 
-        if(shapes.timer.repulse < 3000) {
-            window.setTimeout('rectApp.repulse()', 50);
-            window.setTimeout('rectApp.drawShapes()', 50);
-        } else if (shapes.timer.repulse >= 3000) {
-            shapes.timer.repulse = 0;
+        if(shapes.timer.fourPoint < 3000) {
+            window.setTimeout('rectApp.fourPoint()', 100);
+            window.setTimeout('rectApp.drawShapes()', 100);
+        } else if (shapes.timer.fourPoint >= 3000) {
+            shapes.timer.fourPoint = 0;
         }
-
-        console.log(shapes.timer.repulse);
     }
 
     shapes.drift = function() {
@@ -262,7 +280,7 @@ var rectApp = {};
             shapes.timer.drift = 0;
         }
 
-        console.log(shapes.timer.drift);
+        // console.log(shapes.timer.drift);
     }
 
     shapes.slightDrift = function() {
@@ -278,17 +296,88 @@ var rectApp = {};
             }
 
             rectangle.set({position:{x: randPosX,y: randPosY}});
-
-            shapes.drawShapes();
-
         });
+
+        shapes.timer.slightDrift += 1000;
+
+        if(shapes.timer.slightDrift < 8000) {
+            window.setTimeout('rectApp.slightDrift()', 1000);
+            window.setTimeout('rectApp.drawShapes()', 1000);
+        } else if (shapes.timer.slightDrift >= 8000) {
+            shapes.saveShapes();
+            shapes.timer.slightDrift = 0;
+        }
+
+        console.log(shapes.timer.slightDrift);
+
+    }
+
+    shapes.enlarge = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            var enlargeWidth = rectangle.get('width') + 10;
+            var enlargeHeight = rectangle.get('height') + 10;
+
+            rectangle.set({width: enlargeWidth, height: enlargeHeight});
+        });
+
+        shapes.drawShapes();
+    }
+
+    shapes.shrink = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            var enlargeWidth = rectangle.get('width') - 10;
+            var enlargeHeight = rectangle.get('height') - 10;
+
+            rectangle.set({width: enlargeWidth, height: enlargeHeight});
+        });
+
+        shapes.drawShapes();
+    }
+
+    shapes.shrinkLarge = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            if(Math.random() < .5) {
+                var enlargeWidth = rectangle.get('width') + 10;
+                var enlargeHeight = rectangle.get('height') + 10;
+
+                rectangle.set({width: enlargeWidth, height: enlargeHeight});
+            } else {
+                var enlargeWidth = rectangle.get('width') - 10;
+                var enlargeHeight = rectangle.get('height') - 10;
+
+                rectangle.set({width: enlargeWidth, height: enlargeHeight});
+            }
+        });
+
+        shapes.timer.shrinkLarge += 200
+
+        if(shapes.timer.shrinkLarge < 2000) {
+            window.setTimeout('rectApp.shrinkLarge()', 200);
+            window.setTimeout('rectApp.drawShapes()', 200);
+        } else if (shapes.timer.shrinkLarge >= 2000) {
+            shapes.saveShapes();
+            shapes.timer.shrinkLarge = 0;
+        }
+
+        // console.log(shapes.timer.slightDrift);
+
+    }
+
+    shapes.flop = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            rectangle.set({width: rectangle.get('height'), height: rectangle.get('width')});
+        });
+        shapes.drawShapes();
     }
 
     shapes.timer = {
         flow: 0,
         drift: 0,
         populate: 0,
-        repulse: 0
+        repulse: 0,
+        slightDrift: 0,
+        shrinkLarge: 0,
+        fourPoint: 0
     }
 
     shapes.posX = 114;
@@ -338,13 +427,17 @@ var rectApp = {};
         shapes.saveShapes();
     });
 
+    // shapes.rectangles.on('change', function (model, col, options) {
+    //     shapes.drawShapes();
+    // });
+
     shapes.rectangles.add(r);
 
     console.log(shapes.rectangles.length);
 
-    shapes.drawShapes();
-
     shapes.defaultRect = r;
+
+    shapes.drawShapes();
 
     // Validate is triggered automatically by Backbone w/ 'set' and 'save' operations.
 
