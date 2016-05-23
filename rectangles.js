@@ -175,15 +175,19 @@ var rectApp = {};
     
         shapes.rectangles.forEach(function (rectangle) {
 
-            if(rectangle.get('position').x < (500 * Math.random()) ) {
-                var randPosX = shapes.posX += (Math.random() * 10);
-                var randPosY = shapes.posY -= (Math.random() * 10);
-            } else {
-                var randPosX = shapes.posX -= (Math.random() * 10);
-                var randPosY = shapes.posY += (Math.random() * 10);
-            }
+            if(rectangle.get('selected')) {
 
-            rectangle.set({position:{x: randPosX,y: randPosY}});
+                if(rectangle.get('position').x < (500 * Math.random()) ) {
+                    var randPosX = shapes.posX += (Math.random() * 10);
+                    var randPosY = shapes.posY -= (Math.random() * 10);
+                } else {
+                    var randPosX = shapes.posX -= (Math.random() * 10);
+                    var randPosY = shapes.posY += (Math.random() * 10);
+                }
+
+                rectangle.set({position:{x: randPosX,y: randPosY}});
+
+            }  
 
         });
 
@@ -205,15 +209,18 @@ var rectApp = {};
 
             // head for corners
 
-            if(rectangle.get('position').x < (500 * Math.random()) ) {
-                var randPosX = rectangle.get('position').x - (shapes.posX / 50);
-                var randPosY = rectangle.get('position').y - (shapes.posY / 50);
-            } else {
-                var randPosX = rectangle.get('position').x + (shapes.posX / 50);
-                var randPosY = rectangle.get('position').y + (shapes.posX / 50);
-            }
+            if(rectangle.get('selected')) {
 
-            rectangle.set({position:{x: randPosX,y: randPosY}});
+                if(rectangle.get('position').x < (500 * Math.random()) ) {
+                    var randPosX = rectangle.get('position').x - (shapes.posX / 50);
+                    var randPosY = rectangle.get('position').y - (shapes.posY / 50);
+                } else {
+                    var randPosX = rectangle.get('position').x + (shapes.posX / 50);
+                    var randPosY = rectangle.get('position').y + (shapes.posX / 50);
+                }
+
+                rectangle.set({position:{x: randPosX,y: randPosY}});
+            }
 
         });
 
@@ -233,47 +240,55 @@ var rectApp = {};
     
         shapes.rectangles.forEach(function (rectangle) {
 
-            if( Math.random() < .5 ) {
-                var randPosX = shapes.posX * 2;
-                var randPosY = shapes.posY * 2;
-            } else if ( Math.random() < .5) {
-                var randPosX = shapes.posX * 2
-                var randPosY = shapes.posY / 2
-            } else if ( Math.random() < .5) {
-                var randPosX = shapes.posX / 2
-                var randPosY = shapes.posY * 2
-            } else {
-                var randPosX = shapes.posX / 2
-                var randPosY = shapes.posY / 2
-            }
+            if(rectangle.get('selected')) {
 
-            rectangle.set({position:{x: randPosX,y: randPosY}});
+                if( Math.random() < .5 ) {
+                    var randPosX = shapes.posX * 2;
+                    var randPosY = shapes.posY * 2;
+                } else if ( Math.random() < .5) {
+                    var randPosX = shapes.posX * 2
+                    var randPosY = shapes.posY / 2
+                } else if ( Math.random() < .5) {
+                    var randPosX = shapes.posX / 2
+                    var randPosY = shapes.posY * 2
+                } else {
+                    var randPosX = shapes.posX / 2
+                    var randPosY = shapes.posY / 2
+                }
+
+                rectangle.set({position:{x: randPosX,y: randPosY}});
+            }
 
         });
 
-        shapes.timer.fourPoint += 100;
+            shapes.timer.fourPoint += 100;
 
-        if(shapes.timer.fourPoint < 3000) {
-            window.setTimeout('rectApp.fourPoint()', 100);
-            window.setTimeout('rectApp.drawShapes()', 100);
-        } else if (shapes.timer.fourPoint >= 3000) {
-            shapes.timer.fourPoint = 0;
-        }
+            if(shapes.timer.fourPoint < 3000) {
+                window.setTimeout('rectApp.fourPoint()', 100);
+                window.setTimeout('rectApp.drawShapes()', 100);
+            } else if (shapes.timer.fourPoint >= 3000) {
+                shapes.timer.fourPoint = 0;
+            }
+
     }
 
     shapes.drift = function() {
     
         shapes.rectangles.forEach(function (rectangle) {
 
-            if(rectangle.get('position').x < (500 * Math.random()) ) {
-                var randPosX = rectangle.get('position').x += (Math.random() * 30);
-                var randPosY = rectangle.get('position').y -= (Math.random() * 30);
-            } else {
-                var randPosX = rectangle.get('position').x -= (Math.random() * 30);
-                var randPosY = rectangle.get('position').y += (Math.random() * 30);
-            }
+            if(rectangle.get('selected')) {
 
-            rectangle.set({position:{x: randPosX,y: randPosY}});
+                if(rectangle.get('position').x < (500 * Math.random()) ) {
+                    var randPosX = rectangle.get('position').x += (Math.random() * 30);
+                    var randPosY = rectangle.get('position').y -= (Math.random() * 30);
+                } else {
+                    var randPosX = rectangle.get('position').x -= (Math.random() * 30);
+                    var randPosY = rectangle.get('position').y += (Math.random() * 30);
+                }
+
+                rectangle.set({position:{x: randPosX,y: randPosY}});
+
+            }
 
         });
 
@@ -294,15 +309,18 @@ var rectApp = {};
     
         shapes.rectangles.forEach(function (rectangle) {
 
-            if(rectangle.get('position').x < (500 * Math.random()) ) {
-                var randPosX = rectangle.get('position').x += (Math.random() * 3);
-                var randPosY = rectangle.get('position').y -= (Math.random() * 3);
-            } else {
-                var randPosX = rectangle.get('position').x -= (Math.random() * 3);
-                var randPosY = rectangle.get('position').y += (Math.random() * 3);
-            }
+            if(rectangle.get('selected')) {
 
-            rectangle.set({position:{x: randPosX,y: randPosY}});
+                if(rectangle.get('position').x < (500 * Math.random()) ) {
+                    var randPosX = rectangle.get('position').x += (Math.random() * 3);
+                    var randPosY = rectangle.get('position').y -= (Math.random() * 3);
+                } else {
+                    var randPosX = rectangle.get('position').x -= (Math.random() * 3);
+                    var randPosY = rectangle.get('position').y += (Math.random() * 3);
+                }
+
+                rectangle.set({position:{x: randPosX,y: randPosY}});
+            }
         });
 
         shapes.timer.slightDrift += 1000;
@@ -321,10 +339,13 @@ var rectApp = {};
 
     shapes.enlarge = function() {
         shapes.rectangles.forEach(function (rectangle) {
-            var enlargeWidth = rectangle.get('width') + 10;
-            var enlargeHeight = rectangle.get('height') + 10;
 
-            rectangle.set({width: enlargeWidth, height: enlargeHeight});
+            if(rectangle.get('selected')) {
+                var enlargeWidth = rectangle.get('width') + 10;
+                var enlargeHeight = rectangle.get('height') + 10;
+
+                rectangle.set({width: enlargeWidth, height: enlargeHeight});
+            }
         });
 
         shapes.drawShapes();
@@ -332,10 +353,13 @@ var rectApp = {};
 
     shapes.shrink = function() {
         shapes.rectangles.forEach(function (rectangle) {
-            var enlargeWidth = rectangle.get('width') - 10;
-            var enlargeHeight = rectangle.get('height') - 10;
 
-            rectangle.set({width: enlargeWidth, height: enlargeHeight});
+            if(rectangle.get('selected')) {
+                var enlargeWidth = rectangle.get('width') - 10;
+                var enlargeHeight = rectangle.get('height') - 10;
+
+                rectangle.set({width: enlargeWidth, height: enlargeHeight});
+            }
         });
 
         shapes.drawShapes();
@@ -343,16 +367,20 @@ var rectApp = {};
 
     shapes.shrinkLarge = function() {
         shapes.rectangles.forEach(function (rectangle) {
-            if(Math.random() < .5) {
-                var enlargeWidth = rectangle.get('width') + 10;
-                var enlargeHeight = rectangle.get('height') + 10;
 
-                rectangle.set({width: enlargeWidth, height: enlargeHeight});
-            } else {
-                var enlargeWidth = rectangle.get('width') - 10;
-                var enlargeHeight = rectangle.get('height') - 10;
+            if(rectangle.get('selected')) {
 
-                rectangle.set({width: enlargeWidth, height: enlargeHeight});
+                if(Math.random() < .5) {
+                    var enlargeWidth = rectangle.get('width') + 10;
+                    var enlargeHeight = rectangle.get('height') + 10;
+
+                    rectangle.set({width: enlargeWidth, height: enlargeHeight});
+                } else {
+                    var enlargeWidth = rectangle.get('width') - 10;
+                    var enlargeHeight = rectangle.get('height') - 10;
+
+                    rectangle.set({width: enlargeWidth, height: enlargeHeight});
+                }
             }
         });
 
@@ -373,7 +401,12 @@ var rectApp = {};
 
     shapes.flop = function() {
         shapes.rectangles.forEach(function (rectangle) {
-            rectangle.set({width: rectangle.get('height'), height: rectangle.get('width')});
+
+            if(rectangle.get('selected')) {
+
+                rectangle.set({width: rectangle.get('height'), height: rectangle.get('width')});
+
+            }
         });
 
         shapes.drawShapes();
@@ -392,6 +425,18 @@ var rectApp = {};
     shapes.posX = 114;
 
     shapes.posY = 543;
+
+    shapes.selectAll = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            rectangle.set({selected: true});
+        })
+    }
+
+    shapes.deselectAll = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            rectangle.set({selected: false});
+        })
+    }
 
     shapes.initDraggable = function() {
         var gridContainer = $("#canvas");
