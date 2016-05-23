@@ -17,7 +17,8 @@ var rectApp = {};
             'position': {
                 x: 600,
                 y: 100
-            }
+            },
+            'selected': false
         },
     });
 
@@ -32,7 +33,7 @@ var rectApp = {};
         },
 
         events: {
-            'click': 'move'
+            'click': 'select'
         },
 
         render: function() {
@@ -66,8 +67,14 @@ var rectApp = {};
             // this.$el.css({'background-image': url("./img/smearmaze.jpg")});
         },
 
-        move: function () {
-            this.$el.css('left', this.$el.position().up + 10);
+        select: function () {
+            if(this.model.get('selected') === false) {
+                this.model.set({'selected': true});
+                console.log('selected');
+            } else {
+                this.model.set({'selected': false});
+                console.log('deselected');
+            }
         }
 
     });
@@ -368,6 +375,7 @@ var rectApp = {};
         shapes.rectangles.forEach(function (rectangle) {
             rectangle.set({width: rectangle.get('height'), height: rectangle.get('width')});
         });
+
         shapes.drawShapes();
     }
 
