@@ -165,7 +165,6 @@ var rectApp = {};
             shapes.timer.populate += 100
             shapes.add();
             window.setTimeout('rectApp.populate()', 100);
-            // window.setTimeout('rectApp.drawShapes()', 100);
         } else if (shapes.timer.populate >= 800) {
             shapes.timer.populate = 0;
         }
@@ -197,6 +196,7 @@ var rectApp = {};
             window.setTimeout('rectApp.flow()', 50);
             window.setTimeout('rectApp.drawShapes()', 50);
         } else if (shapes.timer.flow >= 3000) {
+            window.setTimeout('rectApp.slightDrift()', 1000);
             shapes.timer.flow = 0;
         }
 
@@ -230,6 +230,7 @@ var rectApp = {};
             window.setTimeout('rectApp.repulse()', 100);
             window.setTimeout('rectApp.drawShapes()', 100);
         } else if (shapes.timer.repulse >= 3000) {
+            window.setTimeout('rectApp.slightDrift()', 1000);
             shapes.timer.repulse = 0;
         }
 
@@ -268,6 +269,7 @@ var rectApp = {};
                 window.setTimeout('rectApp.drawShapes()', 100);
             } else if (shapes.timer.fourPoint >= 3000) {
                 shapes.timer.fourPoint = 0;
+                window.setTimeout('rectApp.slightDrift()', 1000);
             }
 
     }
@@ -296,8 +298,9 @@ var rectApp = {};
 
         if(shapes.timer.drift < 1000) {
             window.setTimeout('rectApp.drift()', 100);
-            window.setTimeout('rectApp.drawShapes()', 200);
+            window.setTimeout('rectApp.drawShapes()', 100);
         } else if (shapes.timer.drift >= 1000) {
+            window.setTimeout('rectApp.slightDrift()', 200);
             shapes.saveShapes();
             shapes.timer.drift = 0;
         }
@@ -312,11 +315,11 @@ var rectApp = {};
             if(rectangle.get('selected')) {
 
                 if(rectangle.get('position').x < (500 * Math.random()) ) {
-                    var randPosX = rectangle.get('position').x += (Math.random() * 3);
-                    var randPosY = rectangle.get('position').y -= (Math.random() * 3);
+                    var randPosX = rectangle.get('position').x += Math.random() * 2;
+                    var randPosY = rectangle.get('position').y -= Math.random() * 2;
                 } else {
-                    var randPosX = rectangle.get('position').x -= (Math.random() * 3);
-                    var randPosY = rectangle.get('position').y += (Math.random() * 3);
+                    var randPosX = rectangle.get('position').x -= Math.random() * 2;
+                    var randPosY = rectangle.get('position').y += Math.random() * 2;
                 }
 
                 rectangle.set({position:{x: randPosX,y: randPosY}});
@@ -387,10 +390,10 @@ var rectApp = {};
         shapes.timer.shrinkLarge += 200
 
         if(shapes.timer.shrinkLarge < 2000) {
-            window.setTimeout('rectApp.slightDrift()', 200);
             window.setTimeout('rectApp.shrinkLarge()', 200);
             window.setTimeout('rectApp.drawShapes()', 200);
         } else if (shapes.timer.shrinkLarge >= 2000) {
+            window.setTimeout('rectApp.slightDrift()', 1000);
             shapes.saveShapes();
             shapes.timer.shrinkLarge = 0;
         }
@@ -432,9 +435,25 @@ var rectApp = {};
         })
     }
 
+    shapes.selectSome = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            if(Math.random() < .5) {
+                rectangle.set({selected: true});
+            }
+        })
+    }
+
     shapes.deselectAll = function() {
         shapes.rectangles.forEach(function (rectangle) {
             rectangle.set({selected: false});
+        })
+    }
+
+    shapes.deselectSome = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+            if(Math.random() < .5) {
+                rectangle.set({selected: false});
+            }
         })
     }
 
