@@ -309,10 +309,14 @@ var rectApp = {};
     }
 
     shapes.slightDrift = function() {
-    
+        
+        var selectedOnce = false;
+
         shapes.rectangles.forEach(function (rectangle) {
 
             if(rectangle.get('selected')) {
+
+                selectedOnce = true;
 
                 if(rectangle.get('position').x < (500 * Math.random()) ) {
                     var randPosX = rectangle.get('position').x += Math.random() * 2;
@@ -328,7 +332,7 @@ var rectApp = {};
 
         shapes.timer.slightDrift += 1000;
 
-        if(shapes.timer.slightDrift < 8000) {
+        if(shapes.timer.slightDrift < 8000 && selectedOnce) {
             window.setTimeout('rectApp.slightDrift()', 1000);
             window.setTimeout('rectApp.drawShapes()', 1000);
         } else if (shapes.timer.slightDrift >= 8000) {
