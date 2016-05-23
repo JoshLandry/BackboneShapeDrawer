@@ -153,11 +153,24 @@ var rectApp = {};
             }
         ]);
 
-    shapes.add = function() {
+    shapes.add = function(prefs) {
         var shape = Rectangles.oneRectangle();
+        if(shapes.selectNew) {
+            shape.set({selected: true});
+        }
         shapes.rectangles.add(shape);
         // console.log(shapes.rectangles.length);
         shapes.drawShapes();
+    }
+
+    shapes.selectNew = true;
+
+    shapes.toggleSelectNew = function() {
+        if (shapes.selectNew) {
+            shapes.selectNew = false;
+        } else {
+            shapes.selectNew = true;
+        }
     }
 
     shapes.populate = function() {
