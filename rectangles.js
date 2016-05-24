@@ -70,6 +70,7 @@ var rectApp = {};
         select: function () {
             if(this.model.get('selected') === false) {
                 this.model.set({'selected': true});
+                this.$el.css('background-color', black);
                 console.log('selected');
             } else {
                 this.model.set({'selected': false});
@@ -165,6 +166,16 @@ var rectApp = {};
 
     shapes.selectNew = true;
 
+    shapes.residualMomentum = false;
+
+    shapes.toggleMomentum = function() {
+        if (shapes.residualMomentum) {
+            shapes.residualMomentum = false;
+        } else {
+            shapes.residualMomentum = true;
+        }
+    }
+
     shapes.toggleSelectNew = function() {
         if (shapes.selectNew) {
             shapes.selectNew = false;
@@ -209,7 +220,7 @@ var rectApp = {};
             window.setTimeout('rectApp.flow()', 50);
             window.setTimeout('rectApp.drawShapes()', 50);
         } else if (shapes.timer.flow >= 3000) {
-            window.setTimeout('rectApp.slightDrift()', 1000);
+            if(shapes.residualMomentum) {window.setTimeout('rectApp.slightDrift()', 1000)};
             shapes.timer.flow = 0;
         }
 
@@ -243,7 +254,7 @@ var rectApp = {};
             window.setTimeout('rectApp.repulse()', 100);
             window.setTimeout('rectApp.drawShapes()', 100);
         } else if (shapes.timer.repulse >= 3000) {
-            window.setTimeout('rectApp.slightDrift()', 1000);
+            if(shapes.residualMomentum) {window.setTimeout('rectApp.slightDrift()', 1000)};
             shapes.timer.repulse = 0;
         }
 
@@ -282,7 +293,7 @@ var rectApp = {};
                 window.setTimeout('rectApp.drawShapes()', 100);
             } else if (shapes.timer.fourPoint >= 3000) {
                 shapes.timer.fourPoint = 0;
-                window.setTimeout('rectApp.slightDrift()', 1000);
+                if(shapes.residualMomentum) {window.setTimeout('rectApp.slightDrift()', 1000)};
             }
 
     }
@@ -313,7 +324,7 @@ var rectApp = {};
             window.setTimeout('rectApp.drift()', 100);
             window.setTimeout('rectApp.drawShapes()', 100);
         } else if (shapes.timer.drift >= 1000) {
-            window.setTimeout('rectApp.slightDrift()', 200);
+            if(shapes.residualMomentum) {window.setTimeout('rectApp.slightDrift()', 200)};
             shapes.saveShapes();
             shapes.timer.drift = 0;
         }
@@ -410,7 +421,7 @@ var rectApp = {};
             window.setTimeout('rectApp.shrinkLarge()', 200);
             window.setTimeout('rectApp.drawShapes()', 200);
         } else if (shapes.timer.shrinkLarge >= 2000) {
-            window.setTimeout('rectApp.slightDrift()', 1000);
+            if(shapes.residualMomentum) {window.setTimeout('rectApp.slightDrift()', 1000)};
             shapes.saveShapes();
             shapes.timer.shrinkLarge = 0;
         }

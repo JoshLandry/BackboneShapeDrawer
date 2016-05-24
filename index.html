@@ -19,6 +19,12 @@
 
             #canvas {
                 height: 500px;
+                background-color: white;
+            }
+
+            body {
+                background-color: black;
+                color: yellow;
             }
         </style>
     </head>
@@ -30,6 +36,7 @@
         <button onclick="rectApp.selectSome()">Select Some</button>
         <button onclick="rectApp.deselectSome()">Deselect Some</button> <br>
         <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
+        <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br>
 
         <button onclick="rectApp.add()">Add new Rectangle</button> 
         <button onclick="rectApp.populate()">Populate!</button> <br>
