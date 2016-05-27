@@ -70,9 +70,10 @@ var rectApp = {};
         select: function () {
             if(this.model.get('selected') === false) {
                 this.model.set({'selected': true});
-                this.$el.css('background-color', black);
+                this.$el.css('border-color', 'blue');
                 console.log('selected');
             } else {
+                this.setColor();
                 this.model.set({'selected': false});
                 console.log('deselected');
             }
