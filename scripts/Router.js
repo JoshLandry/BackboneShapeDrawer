@@ -2,12 +2,12 @@
 
         var documents = [
             new Backbone.Model({
-                title: 'JavaScript Modules',
-                content: 'why do we need modules'
+                title: 'rectangle',
+                content: 'blue'
             }),
             new Backbone.Model({
-                title: 'content modules',
-                content: 'why do we need content'
+                title: 'triangle',
+                content: 'green'
             })
         ];
 
