@@ -40,7 +40,8 @@ var rectApp = {};
             this.setDimensions();
             this.setPosition();
             this.setColor();
-            this.setImage();
+            // this.setImage();
+            this.setSelected();
             return this;
         },
 
@@ -67,14 +68,24 @@ var rectApp = {};
             // this.$el.css({'background-image': url("./img/smearmaze.jpg")});
         },
 
+        setSelected: function () {
+            if(this.model.get('selected') === false) {
+                this.$el.css('border-color', 'black');
+
+            } else {
+                this.$el.css('border-color', 'purple');
+            }
+        },
+
         select: function () {
             if(this.model.get('selected') === false) {
                 this.model.set({'selected': true});
-                this.$el.css('border-color', 'blue');
+                this.$el.css('border-color', 'purple');
                 console.log('selected');
             } else {
                 this.setColor();
                 this.model.set({'selected': false});
+                this.$el.css('border-color', 'black');
                 console.log('deselected');
             }
         }

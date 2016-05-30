@@ -77,4 +77,4 @@
         Backbone.history.start();
 
         router.navigate('contents', {trigger:true});
-}
+})()
