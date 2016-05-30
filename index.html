@@ -15,16 +15,31 @@
             .rectangle {
                 position: absolute;
                 border: 4px solid black;
+/*                background-image: url('./img/smearmaze.jpg');*/
             }
 
             #canvas {
                 height: 500px;
+                border: 10px solid white;
                 background-color: white;
+                background-size: 1700px 500px;
+                background-image: url("./img/alindercyan.jpg");
+                background-repeat: no-repeat;
+                border-color: white;
+                border-radius: 10px;
             }
 
             body {
                 background-color: black;
+                background-image: url("./img/alinderred.jpg");
                 color: yellow;
+                text-align: center;
+                font-size: 30px;
+            }
+
+            h1 {
+                height: 20px;
+                max-height: 20px;
             }
         </style>
     </head>
@@ -49,21 +64,25 @@
         <button onclick="rectApp.enlarge()">Enlarge</button>
         <button onclick="rectApp.shrink()">Shrink</button>
         <button onclick="rectApp.flop()">Flop!</button> <br>
-        <button onclick="rectApp.shrinkLarge()">Shrink Large</button>
+        <button onclick="rectApp.shrinkLarge()">Shrink Large</button> <br>
+        <button onclick="rectApp.shiftColor()">Shift Color</button> <br>
+
+        <button onclick="rectApp.moveRight()">Move Right</button>
+        <button onclick="rectApp.moveLeft()">Move Left</button>
 
 
-        <div id="timer"></div>
+        <div data-old-id="timer"></div>
         <div id="router"></div>
     </body>
-    <script type="text/javascript" src="./scripts/router.js"></script>
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
+    <script type="text/javascript" src="./scripts/router.js"></script>
     <script>
         document.onmousemove = mouse_position;
 
         function mouse_position(e) {
 
-        rectApp.posX =  (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+        rectApp.posX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
         rectApp.posY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
 
         }

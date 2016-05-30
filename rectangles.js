@@ -14,6 +14,7 @@ var rectApp = {};
             'type': 'shape',
             'width': 50,
             'height': 50,
+            'image': "smearmaze",
             'position': {
                 x: 600,
                 y: 100
@@ -33,14 +34,14 @@ var rectApp = {};
         },
 
         events: {
-            'click': 'select'
+            'click': 'select',
         },
 
         render: function() {
             this.setDimensions();
             this.setPosition();
             this.setColor();
-            // this.setImage();
+            this.setImage();
             this.setSelected();
             return this;
         },
@@ -65,7 +66,7 @@ var rectApp = {};
         },
 
         setImage: function () {
-            // this.$el.css({'background-image': url("./img/smearmaze.jpg")});
+            this.$el.css({'background-image': 'url("./img/' + this.model.get('image') + '.jpg")' });
         },
 
         setSelected: function () {
@@ -83,7 +84,6 @@ var rectApp = {};
                 this.$el.css('border-color', 'purple');
                 console.log('selected');
             } else {
-                this.setColor();
                 this.model.set({'selected': false});
                 this.$el.css('border-color', 'black');
                 console.log('deselected');
@@ -194,6 +194,87 @@ var rectApp = {};
         } else {
             shapes.selectNew = true;
         }
+    }
+
+    shapes.moveRight = function () {
+
+        shapes.rectangles.forEach(function (rectangle) {
+            var newPosition = rectangle.get('position').x + 4;
+
+            if(rectangle.get('selected')) {
+                rectangle.set({position:{x: newPosition,y: rectangle.get('position').y}});
+            }
+        });
+
+        shapes.drawShapes();
+        
+    }
+
+    shapes.moveLeft = function() {
+
+        shapes.rectangles.forEach(function (rectangle) {
+            var newPosition = rectangle.get('position').x - 4;
+
+            if(rectangle.get('selected')) {
+                rectangle.set({position:{x: newPosition,y: rectangle.get('position').y}});
+            }
+        });
+
+        shapes.drawShapes();
+    }
+
+    shapes.moveUp = function() {
+
+        shapes.rectangles.forEach(function (rectangle) {
+            var newPosition = rectangle.get('position').y + 4;
+
+            if(rectangle.get('selected')) {
+                rectangle.set({position:{x: rectangle.get('position').x,y: newPosition}});
+            }
+        });
+
+        shapes.drawShapes();
+    }
+
+    shapes.moveDown = function() {
+
+        shapes.rectangles.forEach(function (rectangle) {
+            var newPosition = rectangle.get('position').y - 4;
+
+            if(rectangle.get('selected')) {
+                rectangle.set({position:{x: rectangle.get('position').x,y: newPosition}});
+            }
+        });
+
+        shapes.drawShapes();
+    }
+
+    shapes.images = ['alinderblue', 'dreamcity', 'smearmaze', 'colorgrid', 'chapter3', 'alinderred', 'alindercyan'];
+
+    shapes.shiftColor = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+
+            if(rectangle.get('selected')) {
+
+                console.log( shapes.images.indexOf(rectangle.get('image')) );
+
+                var newImageIndex = shapes.images.indexOf(rectangle.get('image')) + 1;
+                var newImage = shapes.images[newImageIndex];
+
+                rectangle.set({image: newImage});
+                // if(Math.random() < .7) {
+                //     rectangle.set({image: 'alinderblue'});
+                // } else if (Math.random() < .7) {
+                //     rectangle.set({image: 'airport'});
+                // } else if (Math.random() < .7) {
+                //     rectangle.set({image: 'dreamcity'});
+                // } else if (Math.random() < .7) {
+                //     rectangle.set({image: 'colorgrid'})
+                // }
+            }
+        })
+
+        shapes.drawShapes();
     }
 
     shapes.populate = function() {
@@ -473,6 +554,7 @@ var rectApp = {};
         shapes.rectangles.forEach(function (rectangle) {
             rectangle.set({selected: true});
         })
+        shapes.drawShapes();
     }
 
     shapes.selectSome = function() {
@@ -481,12 +563,14 @@ var rectApp = {};
                 rectangle.set({selected: true});
             }
         })
+        shapes.drawShapes();
     }
 
     shapes.deselectAll = function() {
         shapes.rectangles.forEach(function (rectangle) {
             rectangle.set({selected: false});
         })
+        shapes.drawShapes();
     }
 
     shapes.deselectSome = function() {
@@ -495,6 +579,7 @@ var rectApp = {};
                 rectangle.set({selected: false});
             }
         })
+        shapes.drawShapes();
     }
 
     shapes.initDraggable = function() {
