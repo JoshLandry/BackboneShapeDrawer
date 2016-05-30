@@ -19,7 +19,7 @@
             }
 
             #canvas {
-                height: 500px;
+                height: 400px;
                 border: 10px solid white;
                 background-color: white;
                 background-size: 1700px 500px;
@@ -34,7 +34,7 @@
                 background-image: url("./img/alinderred.jpg");
                 color: yellow;
                 text-align: center;
-                font-size: 30px;
+                font-size: 20px;
             }
 
             h1 {
@@ -46,39 +46,83 @@
     <body>
         <h1>Shape Arranger</h1>
         <div id="canvas"></div> <br>
-        <button onclick="rectApp.selectAll()">Select All</button>
-        <button onclick="rectApp.deselectAll()">Deselect All</button> <br>
-        <button onclick="rectApp.selectSome()">Select Some</button>
-        <button onclick="rectApp.deselectSome()">Deselect Some</button> <br>
-        <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
-        <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br>
+        <table>
+            <tr>
+                <td id="buttons">
+                    <button onclick="rectApp.selectAll()">Select All</button>
+                    <button onclick="rectApp.deselectAll()">Deselect All</button> <br>
+                    <button onclick="rectApp.selectSome()">Select Some</button>
+                    <button onclick="rectApp.deselectSome()">Deselect Some</button> <br> <br>
 
-        <button onclick="rectApp.add()">Add new Rectangle</button> 
-        <button onclick="rectApp.populate()">Populate!</button> <br>
+                    <button onclick="rectApp.add()">Add new Rectangle</button> 
+                    <button onclick="rectApp.populate()">Populate!</button> <br>
 
-        <button onclick="rectApp.flow()">Flow</button>
-        <button onclick="rectApp.drift()">Drift</button>
-        <button onclick="rectApp.slightDrift()">Slow Drift</button> <br>
-        <button onclick="rectApp.repulse()">Repulse</button> 
-        <button onclick="rectApp.fourPoint()">Four Points</button> <br>
-        <button onclick="rectApp.enlarge()">Enlarge</button>
-        <button onclick="rectApp.shrink()">Shrink</button>
-        <button onclick="rectApp.flop()">Flop!</button> <br>
-        <button onclick="rectApp.shrinkLarge()">Shrink Large</button> <br>
-        <button onclick="rectApp.shiftColor()">Shift Color</button> <br>
+                    <button onclick="rectApp.moveRight()">Move Right</button>
+                    <button onclick="rectApp.moveLeft()">Move Left</button> <br> <br>
 
-        <button onclick="rectApp.moveRight()">Move Right</button>
-        <button onclick="rectApp.moveLeft()">Move Left</button>
+                </td>
+                <td id="buttons 2">
+                    <button onclick="rectApp.flow()">Flow</button>
+                    <button onclick="rectApp.drift()">Drift</button>
+                    <button onclick="rectApp.slightDrift()">Slow Drift</button> <br>
+                    <button onclick="rectApp.repulse()">Repulse</button> 
+                    <button onclick="rectApp.fourPoint()">Four Points</button> <br>
+                    <button onclick="rectApp.enlarge()">Enlarge</button>
+                    <button onclick="rectApp.shrink()">Shrink</button>
+                    <button onclick="rectApp.flop()">Flop!</button> <br>
+                    <button onclick="rectApp.shrinkLarge()">Shrink Large</button> <br> <br>
+                    <button onclick="rectApp.shiftImage()">Shift Image</button>
+                    <button onclick="rectApp.imageCycle()">Image Cycle</button>
+                </td>
+            </tr>
+            <tr>
+                <td> <div id="router"></div> </td>
+                <td id="options">
+                    <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
+                    <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br>
+                </td>
+            </tr>
+            <tr>
+                                <td> <div id="timer"></div> </td>
+            </tr>
+        </table>
 
 
-        <div data-old-id="timer"></div>
-        <div id="router"></div>
     </body>
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
     <script type="text/javascript" src="./scripts/router.js"></script>
     <script>
         document.onmousemove = mouse_position;
+        document.onkeypress = getChar;
+
+        function getChar(event) {
+          if (event.which == null) {
+            rectApp.currentKey = event.keyCode // IE
+          } else if (event.which!=0 && event.charCode!=0) {
+            rectApp.currentKey = event.which   // the rest
+          } else {
+            rectApp.currentKey = null // special key
+          }
+
+          if(rectApp.currentKey === 54) {
+            rectApp.moveRight();
+          }
+
+          if(rectApp.currentKey === 52) {
+            rectApp.moveLeft();
+          }
+
+          if(rectApp.currentKey === 50) {
+            rectApp.moveUp();
+          }
+
+          if(rectApp.currentKey === 56) {
+            rectApp.moveDown();
+          }
+
+          console.log(rectApp.currentKey);
+        }
 
         function mouse_position(e) {
 

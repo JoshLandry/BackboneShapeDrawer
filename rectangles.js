@@ -251,7 +251,7 @@ var rectApp = {};
 
     shapes.images = ['alinderblue', 'dreamcity', 'smearmaze', 'colorgrid', 'chapter3', 'alinderred', 'alindercyan'];
 
-    shapes.shiftColor = function() {
+    shapes.shiftImage = function() {
         shapes.rectangles.forEach(function (rectangle) {
 
             if(rectangle.get('selected')) {
@@ -261,7 +261,13 @@ var rectApp = {};
                 var newImageIndex = shapes.images.indexOf(rectangle.get('image')) + 1;
                 var newImage = shapes.images[newImageIndex];
 
-                rectangle.set({image: newImage});
+                if (Math.random() < .5 ) {
+                    if(newImage) {
+                        rectangle.set({image: newImage});
+                    } else {
+                        rectangle.set({image: "alinderblue"});
+                    }
+                }
                 // if(Math.random() < .7) {
                 //     rectangle.set({image: 'alinderblue'});
                 // } else if (Math.random() < .7) {
@@ -275,6 +281,18 @@ var rectApp = {};
         })
 
         shapes.drawShapes();
+    }
+
+    shapes.imageCycle = function() {
+
+        // if(shapes.timer.imageCycle < 1000) {
+        //     shapes.timer.imageCycle += 100;
+            shapes.shiftImage();
+            window.setTimeout('rectApp.imageCycle()', 100);
+        // } else if (shapes.timer.imageCycle >= 1000) {
+        //     shapes.timer.imageCycle = 0;
+        // }
+
     }
 
     shapes.populate = function() {
@@ -543,7 +561,8 @@ var rectApp = {};
         repulse: 0,
         slightDrift: 0,
         shrinkLarge: 0,
-        fourPoint: 0
+        fourPoint: 0,
+        imageCycle: 0
     }
 
     shapes.posX = 114;
