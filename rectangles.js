@@ -71,21 +71,21 @@ var rectApp = {};
 
         setSelected: function () {
             if(this.model.get('selected') === false) {
-                this.$el.css('border-color', 'black');
+                // this.$el.css('border-color', 'black');
 
             } else {
-                this.$el.css('border-color', 'purple');
+                // this.$el.css('border-color', 'cyan');
             }
         },
 
         select: function () {
             if(this.model.get('selected') === false) {
                 this.model.set({'selected': true});
-                this.$el.css('border-color', 'purple');
+                // this.$el.css('border-color', 'cyan');
                 console.log('selected');
             } else {
                 this.model.set({'selected': false});
-                this.$el.css('border-color', 'black');
+                // this.$el.css('border-color', 'black');
                 console.log('deselected');
             }
         }
@@ -249,23 +249,25 @@ var rectApp = {};
         shapes.drawShapes();
     }
 
-    shapes.images = ['alinderblue', 'dreamcity', 'smearmaze', 'colorgrid', 'chapter3', 'alinderred', 'alindercyan'];
+    shapes.images = ['alinderblue', 'dreamcity', 'smearmaze', 'pruplecrazed', 'emissioncleanser', 'crazed', 'throughthetv', 'chapter3', 'alinderred', 'alindercyan'];
+
+    shapes.gridImages = ['smearmaze', 'pruplecrazed', 'crazed', 'emissioncleanser', 'rainbowsmear'];
 
     shapes.shiftImage = function() {
         shapes.rectangles.forEach(function (rectangle) {
 
             if(rectangle.get('selected')) {
 
-                console.log( shapes.images.indexOf(rectangle.get('image')) );
+                console.log( shapes.gridImages.indexOf(rectangle.get('image')) );
 
-                var newImageIndex = shapes.images.indexOf(rectangle.get('image')) + 1;
-                var newImage = shapes.images[newImageIndex];
+                var newImageIndex = shapes.gridImages.indexOf(rectangle.get('image')) + 1;
+                var newImage = shapes.gridImages[newImageIndex];
 
                 if (Math.random() < .5 ) {
                     if(newImage) {
                         rectangle.set({image: newImage});
                     } else {
-                        rectangle.set({image: "alinderblue"});
+                        rectangle.set({image: "smearmaze"});
                     }
                 }
                 // if(Math.random() < .7) {
