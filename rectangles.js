@@ -71,21 +71,21 @@ var rectApp = {};
 
         setSelected: function () {
             if(this.model.get('selected') === false) {
-                // this.$el.css('border-color', 'black');
+                this.$el.css('border-color', 'black');
 
             } else {
-                // this.$el.css('border-color', 'cyan');
+                this.$el.css('border-color', 'cyan');
             }
         },
 
         select: function () {
             if(this.model.get('selected') === false) {
                 this.model.set({'selected': true});
-                // this.$el.css('border-color', 'cyan');
+                this.$el.css('border-color', 'cyan');
                 console.log('selected');
             } else {
                 this.model.set({'selected': false});
-                // this.$el.css('border-color', 'black');
+                this.$el.css('border-color', 'black');
                 console.log('deselected');
             }
         }
