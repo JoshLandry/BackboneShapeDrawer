@@ -260,6 +260,29 @@ var rectApp = {};
 
                 console.log( shapes.gridImages.indexOf(rectangle.get('image')) );
 
+                var newImageIndex = shapes.images.indexOf(rectangle.get('image')) + 1;
+                var newImage = shapes.images[newImageIndex];
+
+                if (Math.random() < .5 ) {
+                    if(newImage) {
+                        rectangle.set({image: newImage});
+                    } else {
+                        rectangle.set({image: "alinderblue"});
+                    }
+                }
+            }
+        })
+
+        shapes.drawShapes();
+    }
+
+    shapes.animateGrid = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+
+            if(rectangle.get('selected')) {
+
+                console.log( shapes.gridImages.indexOf(rectangle.get('image')) );
+
                 var newImageIndex = shapes.gridImages.indexOf(rectangle.get('image')) + 1;
                 var newImage = shapes.gridImages[newImageIndex];
 
@@ -270,15 +293,25 @@ var rectApp = {};
                         rectangle.set({image: "smearmaze"});
                     }
                 }
-                // if(Math.random() < .7) {
-                //     rectangle.set({image: 'alinderblue'});
-                // } else if (Math.random() < .7) {
-                //     rectangle.set({image: 'airport'});
-                // } else if (Math.random() < .7) {
-                //     rectangle.set({image: 'dreamcity'});
-                // } else if (Math.random() < .7) {
-                //     rectangle.set({image: 'colorgrid'})
-                // }
+            }
+        })
+
+        shapes.drawShapes();
+    }
+
+    shapes.randomImage = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+
+            if(rectangle.get('selected')) {
+                    if(Math.random() < .7) {
+                    rectangle.set({image: 'alinderblue'});
+                } else if (Math.random() < .7) {
+                    rectangle.set({image: 'airport'});
+                } else if (Math.random() < .7) {
+                    rectangle.set({image: 'dreamcity'});
+                } else if (Math.random() < .7) {
+                    rectangle.set({image: 'colorgrid'})
+                }
             }
         })
 
