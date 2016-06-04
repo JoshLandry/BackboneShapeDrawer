@@ -662,13 +662,14 @@ var rectApp = {};
     shapes.initDraggable = function() {
         var gridContainer = $("#canvas");
 
-            Draggable.create(".rectangle", {
+        shapes.draggable = Draggable.create(".rectangle", {
                 bounds: gridContainer,
                 edgeResistance:1,
-                cursor: "pointer",
                 throwProps:true
             })
     }
+
+    // shapes.draggable.addEventListener("dragend", setPosition);
 
     shapes.hardRedraw = true;
 
