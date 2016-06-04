@@ -30,7 +30,7 @@ var rectApp = {};
         className: 'rectangle',
 
         attributes: {
-             'data-value': 12345
+             // 'data-value': 12345
         },
 
         events: {
@@ -88,6 +88,14 @@ var rectApp = {};
                 this.$el.css('border-color', 'black');
                 console.log('deselected');
             }
+
+            // this.model.set({
+            //                 position: {
+            //                     x: shapes.posX,
+            //                     y: shapes.posY
+            //                 }
+            //                 })
+            this.setPosition();
         }
 
     });
