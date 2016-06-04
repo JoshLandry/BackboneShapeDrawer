@@ -14,7 +14,7 @@
         <style type="text/css">
             .rectangle {
                 position: absolute;
-/*                border: 4px solid black;*/
+                border: 4px solid black;
 /*                background-image: url('./img/smearmaze.jpg');*/
             }
 
@@ -74,8 +74,16 @@
 
                     <button onclick="rectApp.shiftImage()">Shift Image</button>
                     <button onclick="rectApp.animateGrid()">Animate Grid</button>
-                    <button onclick="rectApp.randomImage()">Random Image</button>
-                    <button onclick="rectApp.imageCycle()">Image Cycle</button>
+                    <button onclick="rectApp.randomImage()">Random Image</button> <br> <br>
+
+                    <select size="3" id="animationStyle" onchange="rectApp.setAnimationStyle()">
+                        <option value="grid">Grid</option>
+                        <option value="nextImage">Next Image</option>
+                        <option value="randomImage">Random Image</option>
+                        <option value="off">Off</option>
+                    </select> <br>
+
+                    <button onclick="rectApp.imageCycle()">Animate!</button>
                 </td>
             </tr>
             <tr>

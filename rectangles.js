@@ -318,15 +318,30 @@ var rectApp = {};
         shapes.drawShapes();
     }
 
+    shapes.animationStyle = "grid";
+
+    shapes.setAnimationStyle = function() {
+        shapes.animationStyle = document.querySelectorAll('select')[0].value;
+        console.log('set animation style to ' + shapes.animationStyle);
+    }
+
     shapes.imageCycle = function() {
 
-        // if(shapes.timer.imageCycle < 1000) {
-        //     shapes.timer.imageCycle += 100;
+        if(shapes.animationStyle === "grid") {
+
+            shapes.animateGrid();
+            window.setTimeout('rectApp.imageCycle()', 100);
+
+        } else if (shapes.animationStyle === "nextImage") {
+
             shapes.shiftImage();
             window.setTimeout('rectApp.imageCycle()', 100);
-        // } else if (shapes.timer.imageCycle >= 1000) {
-        //     shapes.timer.imageCycle = 0;
-        // }
+
+        } else if (shapes.animationStyle === "randomImage") {
+
+            shapes.randomImage();
+            window.setTimeout('rectApp.imageCycle()', 100);
+        }
 
     }
 
