@@ -22,7 +22,7 @@
                 height: 400px;
                 border: 10px solid white;
                 background-color: white;
-                background-size: 700px 400px;
+                background-size: 1000px 400px;
                 background-image: url("./img/colors.jpg");
                 background-repeat: no-repeat;
                 border-color: white;
@@ -55,10 +55,11 @@
                     <button onclick="rectApp.deselectSome()">Deselect Some</button> <br> <br>
 
                     <button onclick="rectApp.add()">Add new Rectangle</button> 
-                    <button onclick="rectApp.populate()">Populate!</button> <br>
+                    <button onclick="rectApp.populate()">Populate!</button> <br> <br>
 
-                    <button onclick="rectApp.moveRight()">Move Right</button>
-                    <button onclick="rectApp.moveLeft()">Move Left</button> <br> <br>
+                    <button onclick="rectApp.moveUp()"> ^ </button> <br>                    
+                    <button onclick="rectApp.moveLeft()"> < </button> <button onclick="rectApp.moveRight()"> > </button> <br> 
+                    <button onclick="rectApp.moveDown()"> v </button> <br> <br>
 
                 </td>
                 <td id="buttons 2">
@@ -71,10 +72,6 @@
                     <button onclick="rectApp.shrink()">Shrink</button>
                     <button onclick="rectApp.flop()">Flop!</button> <br>
                     <button onclick="rectApp.shrinkLarge()">Shrink Large</button> <br> <br>
-
-                    <button onclick="rectApp.shiftImage()">Shift Image</button>
-                    <button onclick="rectApp.animateGrid()">Animate Grid</button>
-                    <button onclick="rectApp.randomImage()">Random Image</button> <br> <br>
 
                     <select size="3" id="animationStyle" onchange="rectApp.setAnimationStyle()">
                         <option value="grid">Grid</option>
@@ -125,11 +122,11 @@
           }
 
           if(rectApp.currentKey === 50) {
-            rectApp.moveUp();
+            rectApp.moveDown();
           }
 
           if(rectApp.currentKey === 56) {
-            rectApp.moveDown();
+            rectApp.moveUp();
           }
 
           console.log(rectApp.currentKey);

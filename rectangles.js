@@ -226,7 +226,7 @@ var rectApp = {};
     shapes.moveUp = function() {
 
         shapes.rectangles.forEach(function (rectangle) {
-            var newPosition = rectangle.get('position').y + 4;
+            var newPosition = rectangle.get('position').y - 4;
 
             if(rectangle.get('selected')) {
                 rectangle.set({position:{x: rectangle.get('position').x,y: newPosition}});
@@ -239,7 +239,7 @@ var rectApp = {};
     shapes.moveDown = function() {
 
         shapes.rectangles.forEach(function (rectangle) {
-            var newPosition = rectangle.get('position').y - 4;
+            var newPosition = rectangle.get('position').y + 4;
 
             if(rectangle.get('selected')) {
                 rectangle.set({position:{x: rectangle.get('position').x,y: newPosition}});
@@ -692,6 +692,10 @@ var rectApp = {};
     shapes.rectangles.on('add', function (model, col, options) {
         console.log('added '  + model.get('type') + ' at index ' + model.get('position').x + ", " + model.get('position').y);
         shapes.saveShapes();
+    });
+
+    shapes.rectangles.on('change', function (model, col, options) {
+        console.log('changed');
     });
 
     // shapes.rectangles.on('change', function (model, col, options) {
