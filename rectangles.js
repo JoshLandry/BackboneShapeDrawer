@@ -665,7 +665,7 @@ var rectApp = {};
         shapes.draggable = Draggable.create(".rectangle", {
                 bounds: gridContainer,
                 edgeResistance:1,
-                throwProps:true
+                throwProps:false
             })
     }
 
