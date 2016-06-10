@@ -261,6 +261,8 @@ var rectApp = {};
 
     shapes.gridImages = ['smearmaze', 'pruplecrazed', 'crazed', 'emissioncleanser', 'rainbowsmear'];
 
+    shapes.pixelImages = ['pixel1', 'pixel2', 'pixel3', 'pixel4', 'pixel5', 'pixel6'];
+
     shapes.shiftImage = function() {
         shapes.rectangles.forEach(function (rectangle) {
 
@@ -299,6 +301,29 @@ var rectApp = {};
                         rectangle.set({image: newImage});
                     } else {
                         rectangle.set({image: "smearmaze"});
+                    }
+                }
+            }
+        })
+
+        shapes.drawShapes();
+    }
+
+    shapes.pixelImage = function() {
+        shapes.rectangles.forEach(function (rectangle) {
+
+            if(rectangle.get('selected')) {
+
+                console.log( shapes.pixelImages.indexOf(rectangle.get('image')) );
+
+                var newImageIndex = shapes.pixelImages.indexOf(rectangle.get('image')) + 1;
+                var newImage = shapes.pixelImages[newImageIndex];
+
+                if (Math.random() < .5 ) {
+                    if(newImage) {
+                        rectangle.set({image: newImage});
+                    } else {
+                        rectangle.set({image: "pixel1"});
                     }
                 }
             }
@@ -348,6 +373,9 @@ var rectApp = {};
         } else if (shapes.animationStyle === "randomImage") {
 
             shapes.randomImage();
+            window.setTimeout('rectApp.imageCycle()', 100);
+        } else if (shapes.animationStyle === "pixel") {
+            shapes.pixelImage();
             window.setTimeout('rectApp.imageCycle()', 100);
         }
 

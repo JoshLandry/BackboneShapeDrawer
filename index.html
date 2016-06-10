@@ -16,6 +16,8 @@
             .rectangle {
                 position: absolute;
                 border: 4px solid black;
+                max-height: 400px;
+                max-width: 400px;
 /*                background-image: url('./img/smearmaze.jpg');*/
             }
 
@@ -34,6 +36,10 @@
 
             #timer {
                 color: green;
+            }
+
+            #sidebar {
+
             }
 
             body {
@@ -106,6 +112,7 @@
                 <td>
                     <select size="3" id="animationStyle" onchange="rectApp.setAnimationStyle()">
                         <option value="grid">Grid</option>
+                        <option value="pixel">Pixel</option>
                         <option value="nextImage">Next Image</option>
                         <option value="randomImage">Random Image</option>
                         <option value="off">Off</option>
@@ -116,14 +123,18 @@
             </tr>
         </table>
 
-        <div id="options">
-            <h4>Settings:</h4>
-            <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
-            <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br> <br>
-        </td>
+        <div id="sidebar">
+            <div id="options">
+                <h4>Settings:</h4>
+                <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
+                <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br> <br>
+            </td>
+
+            <div id="timer"></div>
+        </div>
         
         <div id="router"></div>
-        <div id="timer"></div> 
+
 
 
     </body>
