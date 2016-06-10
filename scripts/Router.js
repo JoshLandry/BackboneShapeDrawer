@@ -38,8 +38,8 @@
 
         var DocumentView = Backbone.View.extend({
             render: function () {
-                // this.$el.append(this.make('h1', null, this.model.get('title')));
-                // this.$el.append(this.make('div', null, this.model.get('content')));
+                this.$el.append(this.make('h1', null, this.model.get('title')));
+                this.$el.append(this.make('div', null, this.model.get('content')));
                 $('#router').append("<h1>"+ this.model.get('title')+ "</h1>");
                 $('#router').append(this.model.get('content'));
                 return this;

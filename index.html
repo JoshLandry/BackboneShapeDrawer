@@ -28,6 +28,11 @@
                 background-repeat: no-repeat;
                 border-color: white;
                 border-radius: 10px;
+                max-width: 1000px;
+            }
+
+            #timer {
+                color: green;
             }
 
             body {
@@ -49,21 +54,21 @@
         <div id="canvas"></div> <br>
         <table>
             <tr>
-                <td id="buttons">
+                <tr>
+                    <td><h4>Select:</h4></td>
+                    <td><h4>Effects:</h4></td>
+                </tr>
+                <td>
                     <button onclick="rectApp.selectAll()">Select All</button>
                     <button onclick="rectApp.deselectAll()">Deselect All</button> <br>
                     <button onclick="rectApp.selectSome()">Select Some</button>
                     <button onclick="rectApp.deselectSome()">Deselect Some</button> <br> <br>
 
+                    <h4>Create:</h4>
                     <button onclick="rectApp.add()">Add new Rectangle</button> 
                     <button onclick="rectApp.populate()">Populate!</button> <br> <br>
-
-                    <button onclick="rectApp.moveUp()"> ^ </button> <br>                    
-                    <button onclick="rectApp.moveLeft()"> < </button> <button onclick="rectApp.moveRight()"> > </button> <br> 
-                    <button onclick="rectApp.moveDown()"> v </button> <br> <br>
-
                 </td>
-                <td id="buttons 2">
+                <td>              
                     <button onclick="rectApp.flow()">Flow</button>
                     <button onclick="rectApp.drift()">Drift</button>
                     <button onclick="rectApp.slightDrift()">Slow Drift</button> <br>
@@ -72,8 +77,21 @@
                     <button onclick="rectApp.enlarge()">Enlarge</button>
                     <button onclick="rectApp.shrink()">Shrink</button>
                     <button onclick="rectApp.flop()">Flop!</button> <br>
-                    <button onclick="rectApp.shrinkLarge()">Shrink Large</button> <br> <br>
+                    <button onclick="rectApp.shrinkLarge()">Shrink Large</button> <br> <br> 
+                </td>
+            </tr>
+            <tr>
+                <td><h4>Move Selected Shape:</h4></td>
+                <td><h4>Animate:</h4></td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="rectApp.moveUp()"> ^ </button> <br>                    
+                    <button onclick="rectApp.moveLeft()"> < </button> <button onclick="rectApp.moveRight()"> > </button> <br> 
+                    <button onclick="rectApp.moveDown()"> v </button> <br> <br>
 
+                </td>
+                <td>
                     <select size="3" id="animationStyle" onchange="rectApp.setAnimationStyle()">
                         <option value="grid">Grid</option>
                         <option value="nextImage">Next Image</option>
@@ -84,23 +102,22 @@
                     <button onclick="rectApp.imageCycle()">Animate!</button>
                 </td>
             </tr>
-            <tr>
-                <td> <div id="router"></div> </td>
-                <td id="options">
-                    <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
-                    <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br>
-                </td>
-            </tr>
-            <tr>
-                                <td> <div id="timer"></div> </td>
-            </tr>
         </table>
+
+        <div id="options">
+            <h4>Settings:</h4>
+            <input type="checkbox" onclick="rectApp.toggleSelectNew()" checked>Automatically select new rectangles</input> <br>
+            <input type="checkbox" onclick="rectApp.toggleMomentum()">FX cause residual inertia</input> <br> <br>
+        </td>
+        
+        <div id="router"></div>
+        <div id="timer"></div> 
 
 
     </body>
     <script type="text/javascript" src="rectangles.js"></script>
     <script type="text/javascript" src="timer.js"></script>
-    <script type="text/javascript" src="./scripts/router.js"></script>
+<!--     <script type="text/javascript" src="./scripts/router.js"></script> -->
     <script>
         document.onmousemove = mouse_position;
         document.onkeypress = getChar;
