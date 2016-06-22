@@ -1,0 +1,29 @@
+{
+  "name": "Shape-Modulator",
+  "version": "0.0.1",
+  "description": "A program for drawing rectangles and manipulating them",
+  "main": "server.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoshLandry/BackboneShapeDrawer.git"
+  },
+  "keywords": [
+    
+  ],
+  "author": "Joshua Landry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshLandry/BackboneShapeDrawer/issues"
+  },
+  "homepage": "https://github.com/JoshLandry/BackboneShapeDrawer",
+  "dependencies": {
+    "consolidate": "^0.13.1",
+    "express": "^4.13.1",
+    "mustache": "^2.1.2",
+    "body-parser"
+  },
+  "devDependencies": {
+  }
+}
