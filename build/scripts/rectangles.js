@@ -718,7 +718,7 @@ var rectApp = {};
 
         shapes.rectangles.forEach(function (rectangle) {
             rectangle.save({}, {
-                success: function () {console.log('save 2 server')},
+                success: function () {},
                 error: function () {alert('error motherfxcker')}
             });
 

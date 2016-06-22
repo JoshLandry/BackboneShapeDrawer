@@ -15,11 +15,10 @@ app.set('view engine', 'html');
 
 app.use(express.static('build'));
 
-var port = Math.floor(Math.random() * 1000) + 1000;
-console.log(port);
+app.set('port', (process.env.PORT || 5000));
 
-app.listen(process.env.PORT || port, function() {
-  console.log('Node app is running on port ' + port);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
 
 app.use(bodyparser.json());
