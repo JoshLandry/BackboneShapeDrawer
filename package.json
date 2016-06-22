@@ -3,15 +3,12 @@
   "version": "0.0.1",
   "description": "A program for drawing rectangles and manipulating them",
   "main": "server.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/JoshLandry/BackboneShapeDrawer.git"
   },
-  "keywords": [
-    
-  ],
+  "keywords": [],
   "author": "Joshua Landry",
   "license": "ISC",
   "bugs": {
@@ -19,11 +16,10 @@
   },
   "homepage": "https://github.com/JoshLandry/BackboneShapeDrawer",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "consolidate": "^0.13.1",
     "express": "^4.13.1",
-    "mustache": "^2.1.2",
-    "body-parser"
+    "mustache": "^2.1.2"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
